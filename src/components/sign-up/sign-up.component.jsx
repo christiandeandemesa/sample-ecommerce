@@ -40,9 +40,10 @@ function SignUp() {
 
 			resetFormFields();
 		} catch (err) {
-			if (err.code === 'auth/email-already-in-use') {
-				alert('Cannot create user, email already in use');
-			}
+			if (err.code === 'auth/email-already-in-use')
+				alert('Cannot create user, email already in use.');
+			else if (err.code === 'auth/weak-password')
+				alert('Must use a password with at least 6 characters.');
 
 			console.log('User creation encountered an error', err);
 		}

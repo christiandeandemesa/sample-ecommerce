@@ -21,7 +21,7 @@ function Navbar() {
 				</div>
 
 				<div className='nav-links-container'>
-					<Link to='/signIn' className='nav-link'>
+					<Link to='/auth' className='nav-link'>
 						SIGN IN
 					</Link>
 				</div>
