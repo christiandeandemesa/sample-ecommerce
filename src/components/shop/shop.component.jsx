@@ -6,6 +6,7 @@ import ProductCard from '../product-card/product-card.component';
 
 import './shop.styles.scss';
 
+// This is the shopping page component.
 function Shop() {
 	const {products} = useContext(ProductsContext);
 

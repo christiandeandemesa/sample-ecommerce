@@ -5,8 +5,12 @@ import {Link, Outlet} from 'react-router-dom';
 import {signOutUser} from '../../utils/firebase/firebase.utils';
 
 import {UserContext} from '../../contexts/user.context';
+import {CartContext} from '../../contexts/cart.context';
 
 import {ReactComponent as CrwnLogo} from '../../assets/crown.svg'; // Imports the SVG icon as a component.
+
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 import './navbar.styles.scss';
 
@@ -14,6 +18,7 @@ import './navbar.styles.scss';
 function Navbar() {
 	// Takes the currentUser from the useContext object.
 	const {currentUser} = useContext(UserContext);
+	const {isCartOpen} = useContext(CartContext);
 
 	return (
 		// Use of fragment tag.
@@ -27,22 +32,22 @@ function Navbar() {
 					<Link to='/shop' className='nav-link'>
 						SHOP
 					</Link>
-				</div>
 
-				{/* If currentUser is not null, render the SIGN OUT link. If currentUser is null, render the SIGN IN link. */}
-				{currentUser ? (
-					<div className='nav-links-container'>
+					{/* If currentUser is not null, render the SIGN OUT link. If currentUser is null, render the SIGN IN link. */}
+					{currentUser ? (
 						<span className='nav-link' onClick={signOutUser}>
 							SIGN OUT
 						</span>
-					</div>
-				) : (
-					<div className='nav-links-container'>
+					) : (
 						<Link to='/auth' className='nav-link'>
 							SIGN IN
 						</Link>
-					</div>
-				)}
+					)}
+
+					<CartIcon />
+				</div>
+
+				{isCartOpen && <CartDropdown />}
 			</div>
 			<Outlet /> {/* Outlet renders the current Link that was selected */}
 		</>

@@ -4,6 +4,7 @@ import Button from '../button/button.component';
 
 import './product-card.styles.scss';
 
+// Each product component.
 function ProductCard(props) {
 	const {product} = props;
 	const {name, imageUrl, price} = product;

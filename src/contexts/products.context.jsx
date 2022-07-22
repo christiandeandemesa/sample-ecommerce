@@ -1,6 +1,6 @@
-import {createContext, useEffect, useState} from 'react';
+// ! Add comments
 
-// import {onAuthStateChangedListener} from '../utils/firebase/firebase.utils';
+import {createContext, useState} from 'react';
 
 import SHOP_DATA from '../shop-data.json';
 

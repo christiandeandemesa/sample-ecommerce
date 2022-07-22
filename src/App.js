@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import {UserProvider} from './contexts/user.context';
 import {ProductsProvider} from './contexts/products.context';
+import {CartProvider} from './contexts/cart.context';
 
 import Navbar from './components/navbar/navbar.component';
 import Home from './components/home/home.component';
@@ -13,14 +14,16 @@ function App() {
 		<BrowserRouter>
 			<UserProvider>
 				<ProductsProvider>
-					<Routes>
-						<Route path='/' element={<Navbar />}>
-							{/* index corresponds to the parent level path (e.g. path='/'). */}
-							<Route index element={<Home />} />
-							<Route path='shop' element={<Shop />} />
-							<Route path='auth' element={<Authentication />} />
-						</Route>
-					</Routes>
+					<CartProvider>
+						<Routes>
+							<Route path='/' element={<Navbar />}>
+								{/* index corresponds to the parent level path (e.g. path='/'). */}
+								<Route index element={<Home />} />
+								<Route path='shop' element={<Shop />} />
+								<Route path='auth' element={<Authentication />} />
+							</Route>
+						</Routes>
+					</CartProvider>
 				</ProductsProvider>
 			</UserProvider>
 		</BrowserRouter>
