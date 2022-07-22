@@ -1,4 +1,4 @@
-import {createContext, useState} from 'react';
+import {createContext, useState, useEffect} from 'react';
 
 // This function adds a product to all the cart items.
 export const addCartItem = (cartItems, productToAdd) => {
@@ -18,17 +18,24 @@ export const CartContext = createContext({
 	isCartOpen: false,
 	setIsCartOpen: () => {},
 	cartItems: [],
-	addItemToCart: () => {}
+	addItemToCart: () => {},
+	cartCount: 0
 });
 
-// This component checks if the cart dropdown menu is open (i.e. true) or closed (i.e. false), and if there are items in the cart.
+// This component checks if the cart dropdown menu is open (i.e. true) or closed (i.e. false), if there are items in the cart, and how many items are in the cart.
 export const CartProvider = props => {
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const [cartItems, setCartItems] = useState([]);
+	const [cartCount, setCartCount] = useState(0);
+
+	useEffect(() => {
+		const newCartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
+		setCartCount(newCartCount);
+	}, [cartItems]);
 
 	const addItemToCart = productToAdd => setCartItems(addCartItem(cartItems, productToAdd));
 
-	const value = {isCartOpen, setIsCartOpen, addItemToCart, cartItems};
+	const value = {isCartOpen, setIsCartOpen, addItemToCart, cartItems, cartCount};
 
 	return <CartContext.Provider value={value}>{props.children}</CartContext.Provider>;
 };
