@@ -37,9 +37,7 @@ function SignUp() {
 
 		try {
 			const res = await createAuthUserWithEmailAndPassword(email, password);
-
 			await createUserDocumentFromAuth(res.user, {displayName}); // {displayName} needed to avoid displayName: null in the database.
-
 			resetFormFields();
 		} catch (err) {
 			if (err.code === 'auth/email-already-in-use')
