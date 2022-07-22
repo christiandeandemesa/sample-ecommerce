@@ -5,6 +5,7 @@ import SignUp from '../sign-up/sign-up.component';
 
 import './authentication.styles.scss';
 
+// This is the sign in/up page component.
 function Authentication() {
 	return (
 		<div className='authentication-container'>

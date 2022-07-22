@@ -4,6 +4,7 @@ import CategoryItem from '../category-item/category-item.component';
 
 import './categories-container.styles.scss';
 
+// This is the container component for each category item.
 function CategoriesContainer() {
 	const categories = [
 		{

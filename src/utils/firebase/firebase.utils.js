@@ -1,12 +1,13 @@
 import {initializeApp} from 'firebase/app';
+
 import {
 	getAuth,
-	signInWithRedirect,
 	signInWithPopup,
 	GoogleAuthProvider,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword
 } from 'firebase/auth';
+
 import {getFirestore, doc, getDoc, setDoc} from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -27,18 +28,22 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
+
+// Function that triggers a Google account popup menu to sign in.
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
-// export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
 export const db = getFirestore();
 
+// Function that creates a user document with authorization in the database.
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
 	if (!userAuth) return;
 
+	// doc takes in three parameters: a database, the name of the database, and the user's unique id.
 	const userDocRef = doc(db, 'users', userAuth.uid);
 
 	const userSnapshot = await getDoc(userDocRef);
 
+	// If a matching user document doesn't already exist in the database, create a document
 	if (!userSnapshot.exists()) {
 		const {displayName, email} = userAuth;
 		const createdAt = new Date();
@@ -48,7 +53,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
 				displayName,
 				email,
 				createdAt,
-				...additionalInformation
+				...additionalInformation // Needed to avoid displayName: null in the database.
 			});
 		} catch (err) {
 			console.log('Error creating the user', err.message);
@@ -58,12 +63,14 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
 	return userDocRef;
 };
 
+// Function that signs up a user.
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
 	if (!email || !password) return;
 
 	return await createUserWithEmailAndPassword(auth, email, password);
 };
 
+// Function that signs in a user.
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 	if (!email || !password) return;
 

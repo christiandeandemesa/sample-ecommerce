@@ -11,7 +11,9 @@ import Button from '../button/button.component';
 
 import './sign-in.styles.scss';
 
+// Sign in form component.
 function SignIn() {
+	// defaultFormFields is used to reset the form.
 	const defaultFormFields = {
 		email: '',
 		password: ''
@@ -20,15 +22,16 @@ function SignIn() {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const {email, password} = formFields;
 
-	const resetFormFields = () => {
-		setFormFields(defaultFormFields);
-	};
+	// Function to reset form fields.
+	const resetFormFields = () => setFormFields(defaultFormFields);
 
+	// Function used to sign in with Google account.
 	const signInWithGoogle = async () => {
 		const res = await signInWithGooglePopup();
 		await createUserDocumentFromAuth(res.user);
 	};
 
+	// Function used to manually sign in when the form is submitted.
 	const handleSubmit = async e => {
 		e.preventDefault();
 
@@ -40,10 +43,11 @@ function SignIn() {
 			if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found')
 				alert('Wrong email or password.');
 
-			console.log(err);
+			console.log('User sign in encountered an error', err);
 		}
 	};
 
+	// Function used to change the value of the form the user is typing in or deleting from.
 	const handleChange = e => {
 		const {name, value} = e.target;
 		setFormFields({...formFields, [name]: value});
@@ -58,7 +62,7 @@ function SignIn() {
 					label='Email'
 					type='email'
 					onChange={handleChange}
-					name='email'
+					name='email' // Only inputs with a name attribute will have their values passed when submitting a form.
 					value={email}
 					required
 				/>

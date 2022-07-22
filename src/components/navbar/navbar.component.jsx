@@ -2,12 +2,14 @@ import React from 'react';
 
 import {Link, Outlet} from 'react-router-dom';
 
-import {ReactComponent as CrwnLogo} from '../../assets/crown.svg';
+import {ReactComponent as CrwnLogo} from '../../assets/crown.svg'; // Imports the SVG icon as a component.
 
 import './navbar.styles.scss';
 
+// This is the navigation bar component.
 function Navbar() {
 	return (
+		// Use of fragment tag.
 		<>
 			<div className='navigation'>
 				<Link to='/' className='logo-container'>
@@ -26,7 +28,7 @@ function Navbar() {
 					</Link>
 				</div>
 			</div>
-			<Outlet />
+			<Outlet /> {/* Outlet renders the current Link that was selected */}
 		</>
 	);
 }

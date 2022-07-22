@@ -2,6 +2,7 @@ import React from 'react';
 
 import './category-item.styles.scss';
 
+// This each category component (e.g. hats).
 function CategoryItem(props) {
 	const {imageUrl, title} = props.category;
 
