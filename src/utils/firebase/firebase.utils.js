@@ -10,7 +10,7 @@ import {
 	onAuthStateChanged
 } from 'firebase/auth';
 
-import {getFirestore, doc, getDoc, setDoc} from 'firebase/firestore';
+import {getFirestore, doc, getDoc, setDoc, collection, writeBatch} from 'firebase/firestore';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyDpBDWWPX2MS-SmbpiTlNSNpgfJfhDcga8',
@@ -36,11 +36,28 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
 
+// Function that adds multiple documents to a collection.
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+	// collectionRef is the collection with its title (i.e. collectionKey).
+	const collectionRef = collection(db, collectionKey);
+
+	const batch = writeBatch(db);
+
+	// Adds each object as its own document to the collection.
+	objectsToAdd.forEach(object => {
+		const docRef = doc(collectionRef, object.title.toLowerCase());
+
+		batch.set(docRef, object);
+	});
+
+	await batch.commit();
+};
+
 // Function that creates a user document with authorization in the database.
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
 	if (!userAuth) return;
 
-	// doc takes in three parameters: a database, the name of the database, and the user's unique id.
+	// userDocRef is a document in our database within the users collection.
 	const userDocRef = doc(db, 'users', userAuth.uid);
 
 	const userSnapshot = await getDoc(userDocRef);
