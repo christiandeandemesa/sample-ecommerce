@@ -8,6 +8,7 @@ import Navbar from './components/navbar/navbar.component';
 import Home from './components/home/home.component';
 import Shop from './components/shop/shop.component';
 import Authentication from './components/authentication/authentication.component';
+import Checkout from './components/checkout/checkout.component';
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 								<Route index element={<Home />} />
 								<Route path='shop' element={<Shop />} />
 								<Route path='auth' element={<Authentication />} />
+								<Route path='checkout' element={<Checkout />} />
 							</Route>
 						</Routes>
 					</CartProvider>
