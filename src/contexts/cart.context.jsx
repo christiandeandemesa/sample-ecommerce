@@ -59,7 +59,7 @@ export const CartProvider = props => {
 	// Updates the total price for all the cart items.
 	useEffect(() => {
 		const newTotalCount = cartItems.reduce(
-			(total, cartItem) => (total = cartItem.quantity * cartItem.price),
+			(total, cartItem) => total + cartItem.quantity * cartItem.price,
 			0
 		);
 		setTotalCount(newTotalCount);

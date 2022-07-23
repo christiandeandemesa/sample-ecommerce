@@ -1,5 +1,7 @@
 import {React, useState} from 'react';
 
+import {useNavigate} from 'react-router-dom';
+
 import {
 	signInWithGooglePopup,
 	signInAuthUserWithEmailAndPassword
@@ -21,11 +23,17 @@ function SignIn() {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const {email, password} = formFields;
 
+	const navigate = useNavigate();
+
 	// Function to reset form fields.
 	const resetFormFields = () => setFormFields(defaultFormFields);
 
 	// Function used to sign in with Google account.
-	const signInWithGoogle = async () => await signInWithGooglePopup();
+	const signInWithGoogle = async () => {
+		await signInWithGooglePopup();
+
+		navigate('/');
+	};
 
 	// Function used to manually sign in when the form is submitted.
 	const handleSubmit = async e => {
@@ -34,6 +42,7 @@ function SignIn() {
 		try {
 			await signInAuthUserWithEmailAndPassword(email, password);
 			resetFormFields();
+			navigate('/');
 		} catch (err) {
 			if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found')
 				alert('Wrong email or password.');

@@ -1,5 +1,7 @@
 import {React, useState} from 'react';
 
+import {useNavigate} from 'react-router-dom';
+
 import {
 	createAuthUserWithEmailAndPassword,
 	createUserDocumentFromAuth
@@ -23,6 +25,8 @@ function SignUp() {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const {displayName, email, password, confirmPassword} = formFields;
 
+	const navigate = useNavigate();
+
 	// Function to reset form fields.
 	const resetFormFields = () => setFormFields(defaultFormFields);
 
@@ -39,6 +43,7 @@ function SignUp() {
 			const res = await createAuthUserWithEmailAndPassword(email, password);
 			await createUserDocumentFromAuth(res.user, {displayName}); // {displayName} needed to avoid displayName: null in the database.
 			resetFormFields();
+			navigate('/');
 		} catch (err) {
 			if (err.code === 'auth/email-already-in-use')
 				alert('Cannot create user, email already in use.');

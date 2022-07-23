@@ -16,7 +16,10 @@ function CartDropdown() {
 	const navigate = useNavigate();
 
 	// This function navigates to a route.
-	const goToCheckoutHandler = () => navigate('checkout');
+	const goToCheckoutHandler = () => {
+		if (cartItems.length > 0) navigate('checkout');
+		else alert('Your cart is empty.');
+	};
 
 	return (
 		<div className='cart-dropdown-container'>
