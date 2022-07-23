@@ -10,7 +10,16 @@ import {
 	onAuthStateChanged
 } from 'firebase/auth';
 
-import {getFirestore, doc, getDoc, setDoc, collection, writeBatch} from 'firebase/firestore';
+import {
+	getFirestore,
+	doc,
+	getDoc,
+	setDoc,
+	collection,
+	writeBatch,
+	query,
+	getDocs
+} from 'firebase/firestore';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyDpBDWWPX2MS-SmbpiTlNSNpgfJfhDcga8',
@@ -51,6 +60,25 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 	});
 
 	await batch.commit();
+};
+
+// Function that returns an object where each key-value pair is a document from the categories collection with the document's name (key) and an array (value).
+export const getCategoriesAndDocuments = async () => {
+	const collectionRef = collection(db, 'categories');
+
+	const q = query(collectionRef);
+
+	const querySnapshot = await getDocs(q);
+
+	const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+		const {title, items} = docSnapshot.data();
+
+		acc[title.toLowerCase()] = items;
+
+		return acc;
+	}, {});
+
+	return categoryMap;
 };
 
 // Function that creates a user document with authorization in the database.

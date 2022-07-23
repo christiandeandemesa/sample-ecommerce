@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import {UserProvider} from './contexts/user.context';
-import {ProductsProvider} from './contexts/products.context';
+import {CategoriesProvider} from './contexts/categories.context';
 import {CartProvider} from './contexts/cart.context';
 
 import Navbar from './components/navbar/navbar.component';
@@ -14,7 +14,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<UserProvider>
-				<ProductsProvider>
+				<CategoriesProvider>
 					<CartProvider>
 						<Routes>
 							<Route path='/' element={<Navbar />}>
@@ -26,7 +26,7 @@ function App() {
 							</Route>
 						</Routes>
 					</CartProvider>
-				</ProductsProvider>
+				</CategoriesProvider>
 			</UserProvider>
 		</BrowserRouter>
 	);
