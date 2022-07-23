@@ -20,7 +20,8 @@ function App() {
 							<Route path='/' element={<Navbar />}>
 								{/* index corresponds to the parent level path (e.g. path='/'). */}
 								<Route index element={<Home />} />
-								<Route path='shop' element={<Shop />} />
+								{/* The wildcard * is needed because the Shop component has additional routes. */}
+								<Route path='shop/*' element={<Shop />} />
 								<Route path='auth' element={<Authentication />} />
 								<Route path='checkout' element={<Checkout />} />
 							</Route>

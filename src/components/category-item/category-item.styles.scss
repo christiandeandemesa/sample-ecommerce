@@ -1,4 +1,4 @@
-.category-container {
+.directory-container {
 	min-width: 30%;
 	height: 240px;
 	flex: 1 1 auto;
@@ -53,16 +53,22 @@
 		opacity: 0.7;
 		position: absolute;
 
-		h2 {
-			font-weight: bold;
-			margin: 0 6px 0;
-			font-size: 22px;
-			color: #4a4a4a;
-		}
+		.Title {
+			text-decoration: none;
+			text-align: center;
 
-		p {
-			font-weight: lighter;
-			font-size: 16px;
+			h2 {
+				font-weight: bold;
+				margin: 0 6px 0;
+				font-size: 22px;
+				color: #4a4a4a;
+			}
+
+			p {
+				font-weight: lighter;
+				font-size: 16px;
+				color: black;
+			}
 		}
 	}
 }

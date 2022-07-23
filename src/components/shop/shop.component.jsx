@@ -1,22 +1,20 @@
-import {React, useContext} from 'react';
+import React from 'react';
 
-import {CategoriesContext} from '../../contexts/categories.context';
+import {Routes, Route} from 'react-router-dom';
 
-import CategoryPreview from '../category-preview/category-preview.component';
+import CategoriesPreview from '../categories-preview/categories-preview.component';
+import Category from '../category/category.component';
 
 import './shop.styles.scss';
 
 // This is the shopping page component.
 function Shop() {
-	const {categoriesMap} = useContext(CategoriesContext);
-
 	return (
-		<div className='shop-container'>
-			{Object.keys(categoriesMap).map(title => {
-				const products = categoriesMap[title];
-				return <CategoryPreview key={title} title={title} products={products} />;
-			})}
-		</div>
+		<Routes>
+			<Route index element={<CategoriesPreview />} />
+			{/* Using a colon creates a dynamic route toward the category name. */}
+			<Route path=':category' element={<Category />} />
+		</Routes>
 	);
 }
 
