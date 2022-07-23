@@ -12,7 +12,7 @@ function Button(props) {
 	};
 
 	return (
-		// Dynamically changes the button's className depedning on what buttonType was passed as props.
+		// Dynamically changes the button's className depending on what buttonType was passed as props.
 		<button className={`${buttonTypeClasses[buttonType]} button-container`} {...otherProps}>
 			{children}
 		</button>

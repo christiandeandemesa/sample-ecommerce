@@ -1,6 +1,6 @@
 import {React, useContext} from 'react';
 
-import {Link, Outlet} from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
 
 import {signOutUser} from '../../utils/firebase/firebase.utils';
 
@@ -12,7 +12,12 @@ import {ReactComponent as CrwnLogo} from '../../assets/crown.svg'; // Imports th
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-import './navbar.styles.scss';
+import {
+	NavigationContainer,
+	LogoContainer,
+	NavLinksContainer,
+	NavLinkContainer
+} from './navbar.styles.jsx';
 
 // This is the navigation bar component.
 function Navbar() {
@@ -21,34 +26,31 @@ function Navbar() {
 	const {isCartOpen} = useContext(CartContext);
 
 	return (
-		// Use of fragment tag.
 		<>
-			<div className='navigation'>
-				<Link to='/' className='logo-container'>
+			{/* Example of using a styled component. */}
+			<NavigationContainer>
+				<LogoContainer to='/'>
 					<CrwnLogo className='logo' />
-				</Link>
+				</LogoContainer>
 
-				<div className='nav-links-container'>
-					<Link to='/shop' className='nav-link'>
-						SHOP
-					</Link>
+				<NavLinksContainer>
+					<NavLinkContainer to='/shop'>SHOP</NavLinkContainer>
 
 					{/* If currentUser is not null, render the SIGN OUT link. If currentUser is null, render the SIGN IN link. */}
 					{currentUser ? (
-						<span className='nav-link' onClick={signOutUser}>
+						// Renders the NavLinkContainer as a span element instead of a Link.
+						<NavLinkContainer as='span' onClick={signOutUser}>
 							SIGN OUT
-						</span>
+						</NavLinkContainer>
 					) : (
-						<Link to='/auth' className='nav-link'>
-							SIGN IN
-						</Link>
+						<NavLinkContainer to='/auth'>SIGN IN</NavLinkContainer>
 					)}
 
 					<CartIcon />
-				</div>
+				</NavLinksContainer>
 
 				{isCartOpen && <CartDropdown />}
-			</div>
+			</NavigationContainer>
 			<Outlet /> {/* Outlet renders the current Link that was selected */}
 		</>
 	);
