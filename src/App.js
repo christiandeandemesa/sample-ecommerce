@@ -18,6 +18,7 @@ import Checkout from './components/checkout/checkout.component';
 function App() {
 	const dispatch = useDispatch();
 
+	// Checks if a user is logged in or not.
 	useEffect(() => {
 		const unsubscribe = onAuthStateChangedListener(user => {
 			if (user) createUserDocumentFromAuth(user);

@@ -62,7 +62,7 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 	await batch.commit();
 };
 
-// Function that returns an object where each key-value pair is a document from the categories collection with the document's name (key) and an array (value).
+// Function that returns an array where each element is a document from the categories collection.
 export const getCategoriesAndDocuments = async () => {
 	const collectionRef = collection(db, 'categories');
 
@@ -70,15 +70,7 @@ export const getCategoriesAndDocuments = async () => {
 
 	const querySnapshot = await getDocs(q);
 
-	const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-		const {title, items} = docSnapshot.data();
-
-		acc[title.toLowerCase()] = items;
-
-		return acc;
-	}, {});
-
-	return categoryMap;
+	return querySnapshot.docs.map(docSnapShot => docSnapShot.data());
 };
 
 // Function that creates a user document with authorization in the database.
