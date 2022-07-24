@@ -1,5 +1,3 @@
-// The user reducer takes the state (i.e. all the user's variables) and an action (i.e. what is dispatched), then updates the state's variable(s) with the action's payload depending on the action's type.
-
 import {USER_ACTION_TYPES} from './user.types';
 
 // This is the initial state of each variable in the user.
@@ -7,7 +5,8 @@ const INITIAL_STATE = {
 	currentUser: null
 };
 
-export const userReducer = (state = INITIAL_STATE, action) => {
+// The user reducer takes the state (i.e. all the user's variables) and an action (i.e. what is dispatched), then updates the state's variable(s) with the action's payload depending on the action's type.
+export const userReducer = (state = INITIAL_STATE, action = {}) => {
 	// Gives state the default value of INITIAL_STATE for the first time this executes.
 	const {type, payload} = action;
 
