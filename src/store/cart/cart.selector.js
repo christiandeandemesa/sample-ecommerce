@@ -10,8 +10,8 @@ export const selectCartItems = createSelector(
 
 // Selects isCartOpen from state in the cart reducer.
 export const selectIsCartOpen = createSelector(
-	// Caches what is cached in selectCartItems.
-	[selectCartItems],
+	// Caches state[cart].
+	[selectCartReducer],
 	cart => cart.isCartOpen
 );
 

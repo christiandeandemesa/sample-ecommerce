@@ -2,9 +2,7 @@ import {React, useEffect} from 'react';
 import {Routes, Route} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 
-import {getCategoriesAndDocuments} from '../../utils/firebase/firebase.utils';
-
-import {setCategories} from '../../store/categories/categories.action';
+import {fetchCategoriesAsync} from '../../store/categories/categories.action';
 
 import CategoriesPreview from '../categories-preview/categories-preview.component';
 import Category from '../category/category.component';
@@ -15,15 +13,9 @@ import './shop.styles.scss';
 function Shop() {
 	const dispatch = useDispatch();
 
-	// Gets all the documents from the categories collection, and sets it as an array in categoriesArray.
+	// Dispatches the categories thunk.
 	useEffect(() => {
-		const getCategoriesMap = async () => {
-			const categoriesArray = await getCategoriesAndDocuments();
-
-			dispatch(setCategories(categoriesArray));
-		};
-
-		getCategoriesMap();
+		dispatch(fetchCategoriesAsync());
 	}, []);
 
 	return (
