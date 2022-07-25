@@ -7,6 +7,8 @@ import logger from 'redux-logger';
 
 import {rootReducer} from './root-reducer';
 
+// import {customLogger} from '../middleware/customLogger';
+
 const persistConfig = {
 	key: 'root',
 	storage: storage,
@@ -15,9 +17,15 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const middleWares = [logger]; // This executes before a dispatched action reaches the reducers.
+const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(Boolean); // This executes before a dispatched action reaches the reducers while in development.
 
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+const composeEnhancer =
+	(process.env.NODE_ENV === 'development' &&
+		window &&
+		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+	compose; // If in development, active redux devtools extension.
+
+const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers); // The second argument is for additional default states.
 
