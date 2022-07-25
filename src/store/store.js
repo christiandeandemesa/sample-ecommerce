@@ -13,7 +13,7 @@ import {rootReducer} from './root-reducer';
 const persistConfig = {
 	key: 'root',
 	storage: storage,
-	blacklist: ['user'] // Prevents the the logged in/out user from persisting between reloads.
+	whitelist: ['cart'] // Only allows the cart to persist between reloads.
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

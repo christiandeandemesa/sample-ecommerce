@@ -22,3 +22,9 @@ export const selectCategoriesMap = createSelector(
 			return acc;
 		}, {})
 );
+
+// Selects isLoading from state in the categories reducer.
+export const selectCategoriesIsLoading = createSelector(
+	[selectCategoryReducer],
+	categoriesSlice => categoriesSlice.isLoading
+);
