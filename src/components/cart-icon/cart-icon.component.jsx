@@ -1,6 +1,8 @@
-import {React, useContext} from 'react';
+import {React} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {CartContext} from '../../contexts/cart.context';
+import {selectCartCount, selectIsCartOpen} from '../../store/cart/cart.selector';
+import {setIsCartOpen} from '../../store/cart/cart.action';
 
 import {ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg';
 
@@ -8,9 +10,13 @@ import './cart-icon.styles.scss';
 
 // This is the cart icon component.
 function CartIcon() {
-	const {isCartOpen, setIsCartOpen, cartCount} = useContext(CartContext);
+	const dispatch = useDispatch();
 
-	const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);
+	const cartCount = useSelector(selectCartCount);
+	const isCartOpen = useSelector(selectIsCartOpen);
+
+	// This function opens or closes the cart dropdown menu.
+	const toggleIsCartOpen = () => dispatch(setIsCartOpen(!isCartOpen));
 
 	return (
 		<div className='cart-icon-container' onClick={toggleIsCartOpen}>

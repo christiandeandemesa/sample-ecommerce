@@ -1,4 +1,4 @@
-// Where all the redux happens (i.e. where state lives and where we receive actions).
+// Where each reducer's state lives and where we receive dispatched actions.
 
 import {compose, createStore, applyMiddleware} from 'redux';
 import logger from 'redux-logger';

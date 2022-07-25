@@ -1,12 +1,11 @@
-import {React, useContext} from 'react';
+import {React} from 'react';
 import {Outlet} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 import {signOutUser} from '../../utils/firebase/firebase.utils';
 
 import {selectCurrentUser} from '../../store/user/user.selector';
-
-import {CartContext} from '../../contexts/cart.context';
+import {selectIsCartOpen} from '../../store/cart/cart.selector';
 
 import {ReactComponent as CrwnLogo} from '../../assets/crown.svg'; // Imports the SVG icon as a component.
 
@@ -22,9 +21,8 @@ import {
 
 // This is the navigation bar component.
 function Navbar() {
-	// Takes the currentUser from the useContext object.
 	const currentUser = useSelector(selectCurrentUser);
-	const {isCartOpen} = useContext(CartContext);
+	const isCartOpen = useSelector(selectIsCartOpen);
 
 	return (
 		<>

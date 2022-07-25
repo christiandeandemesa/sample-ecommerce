@@ -10,12 +10,14 @@ import './category.styles.scss';
 
 // Each category page component.
 function Category() {
+	// useParams() creates an object where category (named in the shop component) is the name from the dynamic route (e.g. hats).
 	const {category} = useParams();
 
 	const categoriesMap = useSelector(selectCategoriesMap);
 
 	const [products, setProducts] = useState(categoriesMap[category]);
 
+	// This sets all of the products from a given category (e.g. hats) among all the categories.
 	useEffect(() => {
 		setProducts(categoriesMap[category]);
 	}, [category, categoriesMap]);

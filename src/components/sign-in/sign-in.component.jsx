@@ -25,17 +25,17 @@ function SignIn() {
 
 	const navigate = useNavigate();
 
-	// Function to reset form fields.
+	// This function resets the form fields.
 	const resetFormFields = () => setFormFields(defaultFormFields);
 
-	// Function used to sign in with Google account.
+	// This function is used to sign in with a Google account.
 	const signInWithGoogle = async () => {
 		await signInWithGooglePopup();
 
 		navigate('/');
 	};
 
-	// Function used to manually sign in when the form is submitted.
+	// This function is used to manually sign in when the form is submitted.
 	const handleSubmit = async e => {
 		e.preventDefault();
 
@@ -50,7 +50,7 @@ function SignIn() {
 		}
 	};
 
-	// Function used to change the value of the form the user is typing in or deleting from.
+	// This function is used to change the value of the form the user is typing in or deleting from.
 	const handleChange = e => {
 		const {name, value} = e.target;
 		setFormFields({...formFields, [name]: value});

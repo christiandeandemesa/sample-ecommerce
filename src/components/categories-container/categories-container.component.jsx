@@ -36,6 +36,7 @@ function CategoriesContainer() {
 
 	return (
 		<div className='categories-container'>
+			{/* Dynamically creates multiple components with less code using the above array. */}
 			{categories.map(category => (
 				<CategoryItem key={category.id} category={category} />
 			))}

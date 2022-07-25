@@ -8,7 +8,7 @@ export const selectCategories = createSelector(
 	categoriesSlice => categoriesSlice.categories
 );
 
-// Selects the categoriesMap from state in the categories reducer.
+// Selects categoriesMap from state in the categories reducer.
 export const selectCategoriesMap = createSelector(
 	// Caches what is cached in selectCategories.
 	[selectCategories],

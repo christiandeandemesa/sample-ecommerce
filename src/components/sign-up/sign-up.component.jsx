@@ -27,10 +27,10 @@ function SignUp() {
 
 	const navigate = useNavigate();
 
-	// Function to reset form fields.
+	// This function is used to reset the form fields.
 	const resetFormFields = () => setFormFields(defaultFormFields);
 
-	// Function used to manually sign up when the form is submitted.
+	// This function is used to manually sign up when the form is submitted.
 	const handleSubmit = async e => {
 		e.preventDefault();
 
@@ -54,7 +54,7 @@ function SignUp() {
 		}
 	};
 
-	// Function used to change the value of the form the user is typing in or deleting from.
+	// This function is used to change the value of the form the user is typing in or deleting from.
 	const handleChange = e => {
 		const {name, value} = e.target;
 		setFormFields({...formFields, [name]: value});

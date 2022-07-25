@@ -6,8 +6,8 @@ const INITIAL_STATE = {
 };
 
 // The user reducer takes the state (i.e. all the user's variables) and an action (i.e. what is dispatched), then updates the state's variable(s) with the action's payload depending on the action's type.
+// Gives state the default value of INITIAL_STATE for the first time this executes, and an empty object in case there is no action.
 export const userReducer = (state = INITIAL_STATE, action = {}) => {
-	// Gives state the default value of INITIAL_STATE for the first time this executes.
 	const {type, payload} = action;
 
 	switch (type) {
