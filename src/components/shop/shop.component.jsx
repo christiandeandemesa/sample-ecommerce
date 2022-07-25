@@ -3,6 +3,7 @@ import {Routes, Route} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 
 import {fetchCategoriesAsync} from '../../store/categories/categories.action';
+// import {fetchCategoriesStart} from '../../store/categories/categories.action';
 
 import CategoriesPreview from '../categories-preview/categories-preview.component';
 import Category from '../category/category.component';
@@ -16,6 +17,7 @@ function Shop() {
 	// Dispatches the categories thunk.
 	useEffect(() => {
 		dispatch(fetchCategoriesAsync());
+		// dispatch(fetchCategoriesStart()); // Replace the above dispatch with this if you use redux-saga instead of redux-thunk.
 	}, []);
 
 	return (
