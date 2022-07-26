@@ -8,7 +8,7 @@ import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import {selectTotalCount, selectCartItems} from '../../store/cart/cart.selector';
 import {selectCurrentUser} from '../../store/user/user.selector';
 
-import {clearItemFromCart} from '../../store/cart/cart.action';
+import {clearAllItemsFromCart} from '../../store/cart/cart.action';
 
 import Button from '../button/button.component';
 
@@ -63,9 +63,8 @@ function PaymentForm() {
 			if (paymentResult.paymentIntent.status === 'succeeded') alert('Payment successful');
 
 			navigate('/');
-			console.log(cartItems); // todo Add the function to empty the cart.
-			// dispatch(clearAllItemsFromCart());
-			console.log(cartItems);
+
+			dispatch(clearAllItemsFromCart()); // Removes all the items in the cart.
 		}
 	};
 

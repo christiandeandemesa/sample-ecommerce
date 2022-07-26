@@ -53,3 +53,6 @@ export const clearItemFromCart = (cartItems, productsToClear) => {
 	const newCartItems = clearCartItem(cartItems, productsToClear);
 	return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 };
+
+// Creates an action object that removes every item from the cart that is dispatched to the cart reducer.
+export const clearAllItemsFromCart = () => createAction(CART_ACTION_TYPES.SET_CART_ITEMS, []);
